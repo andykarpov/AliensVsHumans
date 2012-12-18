@@ -337,7 +337,12 @@ class GameOver(Level):
 		txt_message = Program.write(self.game.big_font, self.game.screen_size[0]/2, self.game.screen_size[1]/2, 4, 'Game Over')
 		txt_message.colour = (255, 0, 0)
 
-		txt_help = Program.write(self.game.font, self.game.screen_size[0]/2, self.game.screen_size[1]/2 + 50, 4, 'Press "Enter" to continue')
+		if (game.joystick is not None):
+			help = 'Press "Start" to continue'
+		else:
+			help = 'Press "Enter" to continue'
+
+		txt_help = Program.write(self.game.font, self.game.screen_size[0]/2, self.game.screen_size[1]/2 + 50, 4, help)
 		txt_help.colour = (255,255,255)
 
 		while True:
@@ -364,7 +369,12 @@ class Won(Level):
 		txt_message = Program.write(self.game.big_font, self.game.screen_size[0]/2, self.game.screen_size[1]/2, 4, 'You Won!')
 		txt_message.colour = (0, 255, 0)
 
-		txt_help = Program.write(self.game.font, self.game.screen_size[0]/2, self.game.screen_size[1]/2 + 50, 4, 'Press "Enter" to continue')
+		if (game.joystick is not None):
+			help = 'Press "Start" to continue'
+		else:
+			help = 'Press "Enter" to continue'
+
+		txt_help = Program.write(self.game.font, self.game.screen_size[0]/2, self.game.screen_size[1]/2 + 50, 4, help)
 		txt_help.colour = (255,255,255)		
 
 		while True:
