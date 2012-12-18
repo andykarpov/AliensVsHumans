@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg6502"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="luna.svg">
+  <defs
+     id="defs6504">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient7124">
+      <stop
+         style="stop-color:#e5c305;stop-opacity:1;"
+         offset="0"
+         id="stop7126" />
+      <stop
+         style="stop-color:#e5c305;stop-opacity:0;"
+         offset="1"
+         id="stop7128" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7124"
+       id="linearGradient7130"
+       x1="123.03299"
+       y1="113.43361"
+       x2="147.45036"
+       y2="113.43361"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="219.30089"
+     inkscape:cy="880.73963"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1218"
+     inkscape:window-height="742"
+     inkscape:window-x="63"
+     inkscape:window-y="20"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata6507">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#ffd900;stroke:#000000;stroke-width:0.99322080999999995px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m -1.4387696,72.514209 198.3040696,3.03046 64.7727,-8.08122 162.42995,0 48.82866,-4.04061 26.90558,9.09137 149.47543,-16.16244 83.70624,-18.18274 13.95104,1.01015 -0.99651,100.005101 -746.38065674,-1.01015 z"
+       id="path6604"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/Users/andy/Documents/Projects/Test/Aliens/gfx/bg_luna.png"
+       inkscape:export-xdpi="96.080002"
+       inkscape:export-ydpi="96.080002" />
+    <path
+       sodipodi:type="arc"
+       style="fill:url(#linearGradient7130);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.61500001;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path7122"
+       sodipodi:cx="135"
+       sodipodi:cy="107.36218"
+       sodipodi:rx="12.142858"
+       sodipodi:ry="12.142858"
+       d="m 147.14286,107.36218 a 12.142858,12.142858 0 0 1 -23.80237,3.39186 L 135,107.36218 z"
+       sodipodi:start="0"
+       sodipodi:end="2.8584969"
+       transform="matrix(2.194086,0,0,1,-202.83754,-4.0406102)" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#e5c305;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.61500001;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path7143"
+       sodipodi:cx="237.38585"
+       sodipodi:cy="107.86955"
+       sodipodi:rx="33.335033"
+       sodipodi:ry="15.152288"
+       d="m 270.72088,107.86955 a 33.335033,15.152288 0 0 1 -65.34317,4.23248 l 32.00814,-4.23248 z"
+       sodipodi:start="0"
+       sodipodi:end="2.8584969" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#e5c305;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.61500001;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path7145"
+       sodipodi:cx="407.09146"
+       sodipodi:cy="106.8594"
+       sodipodi:rx="15.152288"
+       sodipodi:ry="12.121831"
+       d="m 422.24375,106.8594 a 15.152288,12.121831 0 1 1 -24.53213,-9.520014 l 9.37984,9.520014 z"
+       sodipodi:start="0"
+       sodipodi:end="4.0448716"
+       transform="translate(-20.203051,-8.0812204)" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#e5c305;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.61500001;stroke-linecap:butt;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path7147"
+       sodipodi:cx="628.31488"
+       sodipodi:cy="102.81879"
+       sodipodi:rx="36.36549"
+       sodipodi:ry="18.182745"
+       d="M 664.68037,102.81879 A 36.36549,18.182745 0 1 1 608.3915,87.607707 l 19.92338,15.211083 z"
+       sodipodi:start="0"
+       sodipodi:end="4.1325789" />
+  </g>
+</svg>
