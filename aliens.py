@@ -14,18 +14,25 @@ class Config:
 
 	default_screen_size = (800, 600)
 	fps = 30
-	full_screen = False
+	full_screen = True
 	detect_screen_size = False
 	fb_dev = "/dev/fb0"
 	lives = 4
 	bullets = 100
 
+	# retrolink gamepad axis buttons set up
+	# todo: replace this with your values
+	joystick_axis = {K_UP: (4, -1.00), K_DOWN: (4, 1.00), K_LEFT: (3, -1.00), K_RIGHT: (3, 1.00)}
+	joystick_buttons = {K_RETURN: 9, K_SPACE: 3, K_ESCAPE: 8}
+	joystick_button_delay = 100
+ 
 class Game(Process):
 
 	screen_size = Config.default_screen_size
 	fps = Config.fps
 	full_screen = Config.full_screen
 	window_title = "Aliens"
+	last_joystick_btn = 0
 
 	@classmethod
 	def load_fnt(self, filename, size):
@@ -45,6 +52,41 @@ class Game(Process):
 		filename = os.path.join(dirname, 'sounds', filename)
 		return Program.load_wav(filename)
 
+	def init_joystick(self):
+		try:
+			joystick = pygame.joystick.Joystick(0)
+			joystick.init()
+			if (joystick.get_init()):
+				self.joystick = joystick
+				self.joystick_name = joystick.get_name()
+				self.last_joystick_btn = 0
+			else:
+				self.joystick = None
+		except Exception as e:
+			self.joystick = None
+
+	def read_joystick(self):
+		result = []
+		if (self.joystick is not None):
+				pygame.event.pump()
+				for i in range(0, self.joystick.get_numaxes()):
+					axis_value = self.joystick.get_axis(i)
+					if (axis_value <= -0.90):
+						axis_value = -1.00
+					if (axis_value >= 0.90):
+						axis_value = 1.00
+
+					for btn, value in Config.joystick_axis.items():
+						if (value == (i, axis_value)):
+							result.append(btn)
+
+					for i in range(0, self.joystick.get_numbuttons()):
+						if self.joystick.get_button(i) != 0:
+							for btn, value in Config.joystick_buttons.items():
+								if (value == i):
+									result.append(btn)
+		return result
+
 	def begin(self):
 
 		# Set fb device for Raspberry pi
@@ -61,6 +103,8 @@ class Game(Process):
 		# set mouse invisible
 		pygame.mouse.set_visible(False)
 
+		self.init_joystick()
+
 		self.font = Game.load_fnt("c64.ttf", 16)
 		self.big_font = Game.load_fnt("c64.ttf", 50)
 
@@ -73,10 +117,11 @@ class Game(Process):
 			# This is the main loop
 
 			# Simple input check
-			if Program.key(K_ESCAPE):
+			if Program.key(K_ESCAPE) or (K_ESCAPE in self.read_joystick()):
 				Program.exit()
 
 			yield
+
 
 	def millis(self):
 		return int(round(time.time() * 1000))
@@ -222,19 +267,37 @@ class Main(Level):
 
 		self.load_resources()
 	
-		txt_message = Program.write(self.game.big_font, self.game.screen_size[0]/2, self.game.screen_size[1]/2, 4, 'Aliens vs Humans')
+		x = self.game.screen_size[0]/2
+		y = self.game.screen_size[1]/2
+
+		txt_message = Program.write(self.game.big_font, x, y, 4, 'Aliens vs Humans')
 		txt_message.colour = (255, 255, 255)
 
-		txt_help = Program.write(self.game.font, self.game.screen_size[0]/2, self.game.screen_size[1]/2 + 50, 4, 'Press "Enter" to start')
-		txt_help.colour = (255,255,255)
+		if (game.joystick is not None):
+			help1 = 'Press "Start" to run game'
+			help2 = 'Press "Select" to quit'
+			help3 = 'Gamepad axis to move, "Y" to fire'
+		else:
+			help1 = 'Press "Enter" to start'
+			help2 = 'Press "ESC" to exit'
+			help3 = 'Cursor keys to move, "Space" to fire'
 
-		txt_copy1 = Program.write(self.game.font, self.game.screen_size[0]/2, self.game.screen_size[1] - 60, 4, 'Idea & Graphics: Nikita Karpov')
+		txt_help1 = Program.write(self.game.font, x, y + 50, 4, help1)
+		txt_help1.colour = (255,255,255)
+
+		txt_help2 = Program.write(self.game.font, x, y + 70, 4, help2)
+		txt_help2.colour = (255,255,255)
+
+		txt_help3 = Program.write(self.game.font, x, y + 90, 4, help3)
+		txt_help3.colour = (255,255,255)
+
+		txt_copy1 = Program.write(self.game.font, x, y*2 - 60, 4, 'Idea & Graphics: Nikita Karpov')
 		txt_copy1.colour = (0, 255, 0)
 
-		txt_copy2 = Program.write(self.game.font, self.game.screen_size[0]/2, self.game.screen_size[1] - 40, 4, 'Music & Programming: Andy Karpov')
+		txt_copy2 = Program.write(self.game.font, x, y*2 - 40, 4, 'Music & Programming: Andy Karpov')
 		txt_copy2.colour = (0, 255, 0)
 
-		txt_copy3 = Program.write(self.game.font, self.game.screen_size[0]/2, self.game.screen_size[1] - 20, 4, 'Copyright (c) 2012')
+		txt_copy3 = Program.write(self.game.font, x, y*2 - 20, 4, 'Copyright (c) 2012')
 		txt_copy3.colour = (0, 255, 0)
 
 		try:
@@ -252,7 +315,7 @@ class Main(Level):
 			if (ship.x > self.game.screen_size[0] + 200):
 				ship.x = -200
 
-			if Program.key_released(K_RETURN):
+			if Program.key_released(K_RETURN) or (K_RETURN in game.read_joystick()):
 				self.signal(S_KILL, True)
 				self.game.scene = Level1(self.game)
 				self.game.scene.lives = Config.lives
@@ -279,7 +342,7 @@ class GameOver(Level):
 
 		while True:
 
-			if Program.key_released(K_RETURN):
+			if Program.key_released(K_RETURN) or (K_RETURN in game.read_joystick()):
 				self.signal(S_KILL, True)
 				self.game.scene = Main(self.game)
 				self.game.scene.lives = Config.lives
@@ -306,7 +369,7 @@ class Won(Level):
 
 		while True:
 
-			if Program.key_released(K_RETURN):
+			if Program.key_released(K_RETURN) or (K_RETURN in game.read_joystick()):
 				self.signal(S_KILL, True)
 				self.game.scene = Main(self.game)
 				self.game.scene.lives = Config.lives
@@ -548,13 +611,13 @@ class Ship(Process):
 
 			if (x == None and y == None):
 
-				if Program.key(K_UP):
+				if Program.key(K_UP) or (K_UP in level.game.read_joystick()):
 					self.y -= self.speed
-				if Program.key(K_DOWN):
+				if Program.key(K_DOWN) or (K_DOWN in level.game.read_joystick()):
 					self.y += self.speed
-				if Program.key(K_LEFT):
+				if Program.key(K_LEFT) or (K_LEFT in level.game.read_joystick()):
 					self.x -= self.speed
-				if Program.key(K_RIGHT):
+				if Program.key(K_RIGHT) or (K_RIGHT in level.game.read_joystick()):
 					self.x += self.speed
 
 				# bounds
@@ -615,7 +678,8 @@ class Ship(Process):
 				level.sound(level.s_ship_collision)
 				self.health -= 20
 
-			if Program.key_released(K_SPACE):
+			if Program.key_released(K_SPACE) or (K_SPACE in level.game.read_joystick() and level.game.millis() - level.game.last_joystick_btn > Config.joystick_button_delay):
+				level.game.last_joystick_btn = level.game.millis()
 				self.fire()
 
 			yield
